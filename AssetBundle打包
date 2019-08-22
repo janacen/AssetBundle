@@ -1,0 +1,22 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEditor;
+using System.IO;
+/// <summary>
+/// AssetBundle打包
+/// </summary>
+public class CreateAssetBundle : MonoBehaviour
+{
+    [MenuItem("Assets/Build AssetBundles")]
+    static void BuildAllAssetBundles()
+    {
+        string dir = Application.streamingAssetsPath;//"AssetBundles";
+        if (Directory.Exists(dir) == false)
+        {
+            Directory.CreateDirectory(dir);
+        }
+        AssetDatabase.Refresh();
+        BuildPipeline.BuildAssetBundles(dir,BuildAssetBundleOptions.None,BuildTarget.StandaloneWindows);
+    }
+}
